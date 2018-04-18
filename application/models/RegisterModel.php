@@ -30,10 +30,45 @@ class RegisterModel extends CI_Model{
           return "3";
     }
     else {
+      //ถ้าผ่านทุกกรณี ให้ insert ค่าที่นี่
       $this->db->query($sql, $bind_data);
-      return $this->db->affected_rows() > 0 ? "T":"F";
+      //check ว่าทำสำเร็จหรือไม่
+      $check = $this->db->affected_rows() > 0 ? "T":"F";
+      if($check=="T"){
+        //ส่งค่า id ที่พึ่งทำสำเร็จกลับมา
+        $login_id = $this->db->insert_id();
+        //สร้าง user ขึ้นมา
+        $this->creatdatamember($login_id);
+        return "T";
+      }else{
+        return "F";
+      }
      }
-    //return $this->db->affected_rows() > 0 ? "T":"F";
+  }
+
+  private function creatdatamember($login_id){
+    $sql = "INSERT INTO member(login_id) VALUES($login_id)";
+    $this->db->query($sql);
+  }
+
+  public function savauserdata($login_id){
+    $data = array(
+			'member_name' => $this->input->post('name'),
+      'member_surname' => $this->input->post('surname'),
+      'member_gender' => $this->input->post('gender'),
+      'member_birthday' => $this->input->post('bday')
+		);
+		$this->db->where('login_id',$login_id);
+		$this->db->update('member',$data);
+  }
+
+  public function getdatauser($login_id){
+    $this->db->select('*');
+    $this->db->from('member');
+    $this->db->where('login_id', $login_id);
+    $this->db->limit(1);
+    $query = $this->db->get();
+    return $query->row();
   }
 
 }

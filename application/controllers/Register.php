@@ -1,15 +1,23 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
-
+date_default_timezone_set('Asia/Bangkok');
 class Register extends CI_Controller {
+
+	function __construct(){
+		parent::__construct();
+		$this->load->model("IP_modern");
+		$this->IP_modern->save();
+	}
 
 	public function index()
 	{
+			$this->load->view('template/header');
 		$this->load->view('Home/Homepage');
 	}
   function load()
   {
 		$data['result'] = "";
+			$this->load->view('template/header');
     $this->load->view('Register/RegisterView',$data);
   }
   function save(){
@@ -24,6 +32,7 @@ class Register extends CI_Controller {
       if($this->form_validation->run() == FALSE)
       {
 				$data['result'] = "";
+				$this->load->view('template/header');
         $this->load->view('Register/RegisterView',$data);
       }
       else
@@ -35,22 +44,28 @@ class Register extends CI_Controller {
         $this->RegisterModel->password = $this->input->post("password");
 				//ถ้า register สำเร็จ ให้แสดงผลว่าสำเร็จ
         if ($this->RegisterModel->save()=='T'){
+        	$this->load->view('template/header');
           $this->load->view('Register/RegisterSuccess');
 			 	// ถ้าข้อมูลซ้ำกลับไปหน้าเดิม และ กรอกใหม่
 				}else if ($this->RegisterModel->save()=="F"){
 						$data["result"] = "ระบบขัดข้องกรุณาลงทะเบียนใหม่อีกครั้ง";
+						$this->load->view('template/header');
 	          $this->load->view('Register/RegisterView',$data);
 	      }else if ($this->RegisterModel->save()=="1"){
 						$data["result"] = "email และ username ซ้ำกรุณากรอกใหม่";
+						$this->load->view('template/header');
 	          $this->load->view('Register/RegisterView',$data);
 	      }else if ($this->RegisterModel->save()=="2"){
 						$data["result"] = "username ซ้ำกรุณากรอกใหม่";
+						$this->load->view('template/header');
 	          $this->load->view('Register/RegisterView',$data);
 	      }else if ($this->RegisterModel->save()=="3"){
 						$data["result"] = "email ซ้ำกรุณากรอกใหม่";
+						$this->load->view('template/header');
 	          $this->load->view('Register/RegisterView',$data);
 	      }
       }
     }
+
 
 }
