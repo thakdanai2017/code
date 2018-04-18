@@ -56,7 +56,8 @@ class RegisterModel extends CI_Model{
 			'member_name' => $this->input->post('name'),
       'member_surname' => $this->input->post('surname'),
       'member_gender' => $this->input->post('gender'),
-      'member_birthday' => $this->input->post('bday')
+      'member_birthday' => $this->input->post('bday'),
+      //'member_picture' => $this->input->post('name').".png"
 		);
 		$this->db->where('login_id',$login_id);
 		$this->db->update('member',$data);
@@ -69,6 +70,24 @@ class RegisterModel extends CI_Model{
     $this->db->limit(1);
     $query = $this->db->get();
     return $query->row();
+  }
+
+  public function uploadpic($login_id,$name_picture){
+    $oldpicture = $this->get_name_picture($login_id);
+    $data = array(
+      'member_picture' => $name_picture
+    );
+    $this->db->where('login_id',$login_id);
+    $this->db->update('member',$data);
+    return $oldpicture ;
+  }
+
+  private function get_name_picture($login_id){
+    $this->db->select('member_picture');
+    $this->db->from('member');
+    $this->db->where('login_id', $login_id);
+    $this->db->limit(1);
+    return $this->db->get()->row()->member_picture;
   }
 
 }

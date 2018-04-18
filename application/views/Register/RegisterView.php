@@ -4,33 +4,8 @@
   if (isset($this->session->userdata['logged_in'])) {
     header("Location: index.php/Maincontrol");
   }
+
 ?>
-
-<h1> Register </h1>
-
-<?php  echo $result ?>
-<?php
-echo form_open('register/save');
-?>
-Email: *<br/>
-<input type = "text" name = "email" maxlength="50" placeholder="กรุณาป้อน email"
-  value="<?php echo set_value('email'); ?>"><br/>
-  <?php echo form_error('email'); ?>
-Username: *<br/>
-<input type = "text" name = "username" maxlength="16" placeholder="กรุณาป้อน username"
-  value="<?php echo set_value('username'); ?>"><br/>
-  <?php echo form_error('username'); ?>
-Password: *<br/>
-<input type = "password" name = "password" maxlength="16" placeholder="กรุณาป้อน password"><br/>
-  <?php echo form_error('password'); ?>
-Retype-password: *<br/>
-<input type = "password" name = "repassword" maxlength="16" ><br/>
-  <?php echo form_error('repassword'); ?>
-<input type = "submit">
-</form>
-
-///////////////////////////////////
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +45,7 @@ Retype-password: *<br/>
 <nav class="navbar navbar-inverse">
 <div class="container-fluid">
   <div class="navbar-header">
-      <a class="navbar-brand" href="Home.php"><font color="ffffff">Slight</font></a>
+      <a class="navbar-brand" href="<?php echo base_url(); ?>"><font color="ffffff">Slight</font></a>
   </div>
 </div>
 </nav>
@@ -81,31 +56,34 @@ Retype-password: *<br/>
     <div class="row">
     <div class="span4 offset4 well">
     	 <legend align="center"  > <b> Register </b></legend>
-          <form class="form-horizontal" action='home.php' method='POST'>
+         <?php
+              echo form_open('register/save',array(
+              'class' => "form-horizontal" ));
+        ?>
+    <?php echo $result; ?>
     <div class="form-group">
-      <label class="control-label col-sm-3" for="name">Username :</label>
+      <label class="control-label col-sm-3" for="username">Username :</label>
       <div class="col-sm-8">
-        <input type = 'name' name = 'name' id = "name" class="form-control"  maxlength="8" placeholder="Enter username">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-3" for="email">Password : </label>
-      <div class="col-sm-8">
-        <input type = 'email' name = 'email' class="form-control"   placeholder="Enter password">
-      </div>
-    </div>
-    <div class="form-group">
-      <label class="control-label col-sm-3" for="email">Re-password : </label>
-      <div class="col-sm-8">
-        <input type = 'email' name = 'email' class="form-control"   placeholder="Enter re-password">
+        <input type = 'username' name = 'username' id = "username" class="form-control"  maxlength="16" placeholder="Enter username" value="<?php echo set_value('username'); ?>"> <?php echo form_error('username'); ?>
       </div>
     </div>
     <div class="form-group">
       <label class="control-label col-sm-3" for="email">Email : </label>
       <div class="col-sm-8">
-        <input type = 'email' name = 'email' class="form-control"   placeholder="Enter email">
+        <input type = 'email' name = 'email' class="form-control" maxlength="50"  placeholder="Enter email" value="<?php echo set_value('email'); ?>"> <?php echo form_error('email'); ?>
       </div>
-
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="password">Password : </label>
+      <div class="col-sm-8">
+        <input type = 'password' name = 'password' class="form-control" maxlength="16"  placeholder="Enter password"> <?php echo form_error('password'); ?>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="control-label col-sm-3" for="repassword">Re-password : </label>
+      <div class="col-sm-8">
+        <input type = 'password' name = 'repassword' class="form-control" maxlength="16"  placeholder="Enter re-password"> <?php echo form_error('repassword'); ?>
+      </div>
     </div>
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-8" align="center">

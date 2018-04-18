@@ -11,13 +11,15 @@ class Register extends CI_Controller {
 
 	public function index()
 	{
-			$this->load->view('template/header');
-		$this->load->view('Home/Homepage');
+			//$this->load->view('template/header');
+		$this->load->model('Post');
+		$data['feed_data'] = $this->Post->getfeed();
+		$this->load->view('Home/Homepage',$data);
 	}
-  function load()
+  function load() //จำไม่ได้ เขียนบอกที
   {
 		$data['result'] = "";
-			$this->load->view('template/header');
+		$this->load->view('template/header');
     $this->load->view('Register/RegisterView',$data);
   }
   function save(){
@@ -46,6 +48,7 @@ class Register extends CI_Controller {
         if ($this->RegisterModel->save()=='T'){
         	$this->load->view('template/header');
           $this->load->view('Register/RegisterSuccess');
+					//$this->load->view('Profile/Profiletest');
 			 	// ถ้าข้อมูลซ้ำกลับไปหน้าเดิม และ กรอกใหม่
 				}else if ($this->RegisterModel->save()=="F"){
 						$data["result"] = "ระบบขัดข้องกรุณาลงทะเบียนใหม่อีกครั้ง";
@@ -66,6 +69,76 @@ class Register extends CI_Controller {
 	      }
       }
     }
+
+		public function upload_profile(){
+				$data['error']= null;
+				$data['upload_data']=null;
+				$this->load->view('Profile/Profile_pic',$data);
+		}
+
+/*
+		public function profile(){
+			$this->load->view('Profile/Profile');
+		}
+
+
+/*
+		function do_upload(){
+			$config['upload_path'] = './uploads';
+			$config['allowed_types'] = 'png|jpg';
+			$config['max_size']	= '100';
+			$config['max_width']  = '1024';
+			$config['max_height']  = '768';
+			//$config['overwrite'] = 'TRUE';
+			//$config['file_name'] = $this->input->post['name'].".png";
+
+			$this->load->library('upload', $config);
+
+			if ( ! $this->upload->do_upload())
+			{
+				//$error = array('error' => $this->upload->display_errors());
+				$data['filename'] = $this->input->post['userfile'];
+				$this->load->view('Profile/Profiletest', $data );
+			}
+			else
+			{
+				$data = array('upload_data' => $this->upload->data());
+
+				$this->load->view('Profile/Profiletest', $data);
+			}
+
+		} */
+
+		function do_upload(){
+			$config['upload_path'] = './uploads';
+			$config['allowed_types'] = 'png|jpg';
+			$config['max_size']	= '100';
+			$config['max_width']  = '1024';
+			$config['max_height']  = '768';
+			$config['encrypt_name'] = TRUE; //เข้ารหัสชื่อfile
+			$this->load->library('upload', $config);
+
+			if ( ! $this->upload->do_upload())
+			{
+				$error = array('error' => $this->upload->display_errors());
+				//$data['filename'] = $this->input->post['userfile'];
+				$this->load->view('Profile/Profile_pic', $error );
+			}
+			else //สำเร็จเด้ออันนี้
+			{
+				$namefile = $this->upload->data();
+				//$data['test'] = $namefile['file_name']; //ชื่อไฟล์
+				$this->load->model('RegisterModel');
+				$login_id = 18;
+				$oldpicture = $this->RegisterModel->uploadpic($login_id,$namefile['file_name']);
+				//ลบไฟล์ภาพอันเก่าเด้อ จะได้ไม่หนัก
+				@unlink("./uploads/".$oldpicture);
+				//$data = array('upload_data' => $namefile);
+				$data['test'] = $oldpicture; //ชื่อไฟล์
+				$this->load->view('Profile/Profile_pic',$data);
+			}
+
+		}
 
 
 }
