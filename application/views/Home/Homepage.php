@@ -20,14 +20,14 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <style>
-    /* Remove the navbar's default margin-bottom and rounded borders */ 
+    /* Remove the navbar's default margin-bottom and rounded borders */
     .navbar {
       background-color: #483D8B;
       color: #00000;
       margin-bottom: 0;
       border-radius: 0;
     }
-    
+
     /* Add a gray background color and some padding to the footer */
     .footer {
       background-color: #483D8B;
@@ -60,6 +60,7 @@
 </head>
 <body>
 
+
 <!-- แถบบน -->
 <nav class="navbar navbar-inverse">
 <div class="container-fluid">
@@ -74,7 +75,7 @@
   </ul>
 
 <!-- ช่องค้นหา -->
- <form class="navbar-form" action="maincontrol/search" method="post" align="center">
+   <form class="navbar-form" action="<?php echo base_url(); ?>index.php/maincontrol/search" method="post" align="center">
     <div class="input-group">
       <input type="text" class="form-control" name="keyword" size="80" placeholder="Search">
         <div class="input-group-btn">
@@ -88,18 +89,31 @@
 </nav>
 <br>
 
+<!-- กล่องที่โพสต์แล้ว -->
 <?php foreach ($feed_data as $value) { ?>
-<center><div class="clearfix" align="left">
-<img class="img" src="img/user1.png" width="100" height="100">
-<?php echo $value['username'];?><br>
-<?php echo $value['post_datetime']; ?><br><br>
-<?php echo $value['post_detail']; ?></div></center>
-<br>
+<div align="center" bgcolor="#FFDEAD">
+<div class="w3-container w3-card w3-white w3-round w3-margin" style="width:1000px"><br>
+        <?php
+  #ถ้ามีรูปแสดงรูป แต่ถ้าไม่มีรูปให้แสดง ภาพตั้งตัน
+  if($value['member_picture']!=NULL){
+    echo "<img class='img' src='".base_url('uploads/'.$value['member_picture'])."' width='100' height='100'>";
+  }else {
+    echo "<img class='img' src='".base_url('uploads/30422253_1813735568931061_1243079156_n.png')."' width='100' height='100'>";
+  }
+  ?>
+        <span class="w3-right "><font color="#000000" size="1"><?php echo $value['post_datetime']; ?><br></font></span>
+        <h5 align="left" > <?php echo $value['username']; ?>
+          <?php //<input id='highlight' type="text" value="<?php echo $value['username']; " readonly="readonly" /> ?><br></h5>
+        <br>
+
+        <p align="left"><?php echo $value['post_detail']; ?></p>
+  </div>
+</div>
 <?php } ?>
 
-<!-- footer -->
-<div class="footer">
-  <p> <a href="<?php echo base_url();?>index.php/register/protest">HACK</a></p>
-</div>
+<script src="//code.jquery.com/jquery-3.1.0.slim.min.js"></script>
+<script src="js/jQuery.highlight.js"></script>
+<script type="text/javascript">
+</script>
 </body>
 </html>

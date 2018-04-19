@@ -111,11 +111,14 @@ class Register extends CI_Controller {
 
 		function do_upload(){
 			$config['upload_path'] = './uploads';
-			$config['allowed_types'] = 'png|jpg';
+			$config['allowed_types'] = 'gif|jpg|png';
 			$config['max_size']	= '100';
 			$config['max_width']  = '1024';
-			$config['max_height']  = '768';
+			$config['max_height']  = '1024';
 			$config['encrypt_name'] = TRUE; //เข้ารหัสชื่อfile
+			$config['remove_spaces'] = TRUE;
+			$config['detect_mime'] = TRUE;
+			$config['mod_mime_fix'] =TRUE;
 			$this->load->library('upload', $config);
 
 			if ( ! $this->upload->do_upload())
@@ -129,13 +132,12 @@ class Register extends CI_Controller {
 				$namefile = $this->upload->data();
 				//$data['test'] = $namefile['file_name']; //ชื่อไฟล์
 				$this->load->model('RegisterModel');
-				$login_id = 18;
+				$login_id = ($this->session->userdata['logged_in']['login_id']);
 				$oldpicture = $this->RegisterModel->uploadpic($login_id,$namefile['file_name']);
 				//ลบไฟล์ภาพอันเก่าเด้อ จะได้ไม่หนัก
 				@unlink("./uploads/".$oldpicture);
 				//$data = array('upload_data' => $namefile);
-				$data['test'] = $oldpicture; //ชื่อไฟล์
-				$this->load->view('Profile/Profile_pic',$data);
+				redirect('Maincontrol');
 			}
 
 		}
