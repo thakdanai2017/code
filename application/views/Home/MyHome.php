@@ -107,7 +107,7 @@
 <br>
 
 <!-- Page Container -->
-<div class="w3-container w3-content" style="max-width:1400px;margin-top:20px">    
+<div class="w3-container w3-content" style="max-width:1400px;margin-top:30px">    
   <!-- The Grid -->
   <div class="w3-row">
     <!-- Left Column -->
@@ -115,12 +115,10 @@
       <!-- Profile -->
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
-         <p class="w3-center"><img src="img/user1.png" class="w3-circle" style="height:106px;width:106px" alt="Panumat"></p>
-         <h4 class="w3-center">Panumat Lastname</h4>
+         <p class="w3-center"><img src="img/user1.png" class="w3-circle" style="height:100px;width:100px;margin-top:30px" ></p>
+         <h4 class="w3-center"> <?php echo $username; ?> </h4>
          <hr>
-         <!-- <p><i class="fa fa-pencil fa-fw w3-margin-right w3-text-theme"></i> Programmer, BUU</p> -->
-         <!-- <p><i class="fa fa-home fa-fw w3-margin-right w3-text-theme"></i> Chonburi, TH</p> -->
-         <p>Birth Day : April 10, 1988</p>
+         <p>Birth Day : </p>
          <p>Sex : Female</p>
         </div>
       </div>
@@ -131,31 +129,23 @@
     </div>
     
     <!-- Middle Column -->
-<div class="container">
-  <form class="form-horizontal postfeed" action='maincontrol/postfeed' method='POST'>
-  <div class="w3-col m8">
+    <div class="w3-col m8">
       <div class="w3-row-padding">
-        <div class="w3-col m11">
+        <div class="w3-col m12">
           <div class="w3-card w3-round w3-white">
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">สร้างโพสต์</h6>
-              <input type="text" name = 'content' id = "content" class="form-control"  maxlength="100" placeholder=" คุณกำลังคิดอะไรอยู่ ? "><br>
-              <button type =submit name =submit value="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
+              <p contenteditable="true" class="w3-border w3-padding">คุณกำลังคิดอะไรอยู่ User</p>
+              <button type="button" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button> 
             </div>
           </div>
         </div>
       </div>
-    </div>
-  </form>
-</div>
-</div>
-</div>
-
-   
+    
 <!-- กล่องโพสต์ -->     
 <?php foreach ($feed_data as $value) { ?>
 <div align="center" bgcolor="#FFDEAD">
-<div class="w3-container w3-card w3-white w3-round w3-margin" style="width:700px"><br>
+<div class="w3-container w3-card w3-white w3-round w3-margin" style="width:800px;"><br>
         <?php
   #ถ้ามีรูปแสดงรูป แต่ถ้าไม่มีรูปให้แสดง ภาพตั้งตัน
   if($value['member_picture']!=NULL){
