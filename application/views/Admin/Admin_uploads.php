@@ -2,11 +2,16 @@
   if (isset($this->session->userdata['logged_in'])) {
   $username = ($this->session->userdata['logged_in']['username']);
   $login_id = ($this->session->userdata['logged_in']['login_id']);
+    if (!isset($this->session->userdata['logged_in']['admin_permission'])) {
+      //echo $this->session->userdata['logged_in']['admin_permission'];
+      header("Location:".base_url());
+    }
   } else {
-    header("location: ".base_url());
+    header("Location:".base_url());
     //ย้ายไปหน้าที่ไม่มีการเข้าสู่ระบบ
   }
 ?>
+
 
   <!-- ช่องค้นหา&ลงทะเบียน -->
     <ul class="nav navbar-nav navbar-right">
@@ -35,13 +40,14 @@
   </form>
 </div>
 </nav>
-
+<?php $login_id=$this->uri->segment(3);
+?>
 <!-- กล่อง login -->
 <br>
 <div align="center">
 <div class="w3-container w3-card w3-white w3-round w3-margin" style="width:1000px" >
-       <legend align="center" style="padding: 20px;"> <b>Upload Profile Picture </b> </legend>
-    <?php echo form_open_multipart('register/do_upload',array('class' => 'form-horizontal' ));?>
+       <legend align="center" style="padding: 20px;"> <b>Upload Profile Picture By Admin </b> </legend>
+    <?php echo form_open_multipart('admin_control/do_upload/'.$login_id,array('class' => 'form-horizontal' ));?>
     <br />
     <?php echo $error; ?>
     <img id="img" src="" alt="" align="center" style="width: 200px;height:200px;padding: 20px;"/>

@@ -2,8 +2,12 @@
   if (isset($this->session->userdata['logged_in'])) {
   $username = ($this->session->userdata['logged_in']['username']);
   $login_id = ($this->session->userdata['logged_in']['login_id']);
+    if (!isset($this->session->userdata['logged_in']['admin_permission'])) {
+      //echo $this->session->userdata['logged_in']['admin_permission'];
+      header("Location:".base_url());
+    }
   } else {
-    header("location: ".base_url());
+    header("Location:".base_url());
     //ย้ายไปหน้าที่ไม่มีการเข้าสู่ระบบ
   }
 ?>
@@ -27,14 +31,14 @@
   </form>
 </div>
 </nav>
-
+<?php $log = $this->uri->segment(3); ?>
 <!-- กล่อง login -->
 <br>
   <div class="container">
     <div class="row">
     <div class="span4 offset4 well">
        <legend align="center" style="padding: 10px;"> <b> Profile </b></legend>
-          <form class="form-horizontal userdata" action="<?php echo base_url('index.php/maincontrol/saveuserdata') ?>" method="post">
+          <form class="form-horizontal userdata" action="<?php echo base_url('index.php/Admin_control/Admin_edituser/'.$log) ?>" method="post">
     <div class="form-group">
       <label class="control-label col-sm-3" for="name">Name :</label>
       <div class="col-sm-8">
@@ -50,7 +54,7 @@
     <div class="form-group">
       <label class="control-label col-sm-3" for="birthday">Birthday : </label>
       <div class="col-sm-8">
-        <input type = 'date' name="bday" min="2000-01-02" value="<?php echo  $userdata->member_birthday ?>" class="form-control" >
+        <input type = 'date' name="bday" min="1995-01-01" value="<?php echo  $userdata->member_birthday ?>" class="form-control" >
       </div>
     </div>
     <div class="form-group">
@@ -63,6 +67,7 @@
     <div class="form-group">
       <div class="col-sm-offset-2 col-sm-8" align="center">
         <input type=submit name='submit' value="Save" class="btn btn-default" >
+        <input type='button' name='cancal' value="cancal" class="btn btn-default" onclick="<?php echo base_url(); ?>">
       </div>
     </div>
  </form>
@@ -71,11 +76,21 @@
 </div>
 </div>
 </div>
-
 <!-- footer -->
 <div class="footer">
   <p>Footer Text</p>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+  $(document).ready(function(){
+        //alert('hello');
+        if('<?php echo $userdata->member_gender;?>' == 'M'){
+           $('#M').attr("checked", "checked");
+        }else{
+            $('#F').attr("checked", "checked");
+        }
+  });
+</script>
 
 </body>
 </html>

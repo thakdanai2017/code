@@ -43,17 +43,17 @@ class Login extends CI_Controller {
 				if ($this->LoginModel->login() != false) {
 					// Load session library
 					$this->load->library('session');
-					if($this->LoginModel->login()->login_id = 1){
+					if($this->LoginModel->login()->level == 1){
 						$session_data = array(
 						'login_id' => $this->LoginModel->login()->login_id,
 						'username' => $this->LoginModel->login()->username,
-						//'admin_permission' => 1
+						'admin_permission' => "admin_permission_success"
 						);
 					}else {
 						$session_data = array(
 						'login_id' => $this->LoginModel->login()->login_id,
 						'username' => $this->LoginModel->login()->username,
-						//'admin_permission' => 0
+						//'admin_permission' => "no_permisstion"
 						);
 					}
 

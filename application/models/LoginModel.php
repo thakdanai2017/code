@@ -7,10 +7,12 @@ class LoginModel extends CI_Model{
     //$this->db->query($sql, $bind_data);
     $username = $this->username;
     $password = md5($this->password);
-    $condition = "username LIKE '$username' AND password LIKE '$password'" ;
+    //$condition = "username LIKE '$username' AND password LIKE '$password'" ;
     $this->db->select('login_id,username,level');
     $this->db->from('login');
-    $this->db->where($condition);
+    //$this->db->where($condition);
+    $this->db->like('username',$username);
+    $this->db->like('password',$password);
     $this->db->limit(1);
     $query = $this->db->get();
     return $query->row() ;

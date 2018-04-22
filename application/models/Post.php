@@ -21,7 +21,7 @@ class Post extends CI_Model{
   }
 
   function getfeed(){
-    $this->db->limit(5);
+    $this->db->limit(15);
     $this->db->order_by('post_id','DESC');
     $result = $this->db->get('Member_post');
     return $result->result_array();
@@ -59,10 +59,25 @@ class Post extends CI_Model{
   }
 
   function search(){
-      //$this->db->like('post_detail',$this->input->post('keyword'));
-      $this->db->like('username',$this->input->post('keyword'));
+      $this->db->like('post_detail',$this->input->post('keyword'));
+      $this->db->or_like('username',$this->input->post('keyword'));
       $this->db->order_by('post_id','DESC');
       $result = $this->db->get('Member_post');
+      return $result->result_array();
+  }
+
+  function search_post(){
+      $this->db->like('post_detail',$this->input->post('keyword'));
+      //$this->db->like('username',$this->input->post('keyword'));
+      $this->db->order_by('post_id','DESC');
+      $result = $this->db->get('Member_post');
+      return $result->result_array();
+  }
+  function search_user(){
+      $this->db->like('username',$this->input->post('keyword'));
+      //$this->db->like('username',$this->input->post('keyword'));
+      $this->db->order_by('login_id','DESC');
+      $result = $this->db->get('admin_view');
       return $result->result_array();
   }
 

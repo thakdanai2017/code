@@ -47,7 +47,7 @@ class RegisterModel extends CI_Model{
   }
 
   private function creatdatamember($login_id){
-    $sql = "INSERT INTO member(login_id) VALUES($login_id)";
+    $sql = "INSERT INTO member(member_picture,login_id) VALUES('30726324_1821071357936462_742876458552131584_n.png',$login_id)";
     $this->db->query($sql);
   }
 
