@@ -74,6 +74,7 @@ class Register extends CI_Controller {
 		public function upload_profile(){
 				$data['error']= null;
 				$data['upload_data']=null;
+				$this->load->view('template/header');
 				$this->load->view('Profile/Profile_pic',$data);
 		}
 

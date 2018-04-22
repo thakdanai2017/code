@@ -46,6 +46,7 @@
       <!-- Profile -->
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
+          <br>
           <?php
           if($userdata->member_picture==NULL){ ?>
           <p class="w3-center"><img src="<?php echo base_url('assets/img/logo2.png');?>" class="w3-circle" style="height:106px;width:106px" alt="<?php echo $username;?>"></p>
@@ -60,8 +61,8 @@
          <p>Birth Day : <?php echo $userdata->member_birthday ;?></p>
          <p>Sex : <?php if ($userdata->member_gender== 'M'){
           echo "Male";
-         }else
-          echo "Female"; ;?></p>
+        }else if($userdata->member_gender== 'F')
+          echo "Female"; ?></p>
 
         </div>
       </div>
@@ -114,7 +115,7 @@
           <!-- ใส่เวลาจากตรงนี้นะ -->
           <br></font></span>
         <br>
-        <input type="text" class="form-control" id="<?php echo $value['post_id'] ?>" align="right" maxlength="100" value="<?php echo $value['post_detail']; ?>"><br>
+        <input type="text" class="form-control" id="content<?php echo $value['post_id'] ?>" align="right" maxlength="100" value="<?php echo $value['post_detail']; ?>"><br>
   </div>
 </div>
 <?php } ?>
@@ -132,25 +133,25 @@
 <script>
 $(document).ready(function(){
     $("[class~=submit]").click(function(event){
-      alert($('#'+$(this).prop("id")).prop("value"));
-      //alert($(this).prop("id"));
-      /*
-        $.post("<?php //echo base_url(); ?>/index.php/maincontrol/updatepost",
+
+        //alert($('#content'+$(this).prop("id")).prop("value"));
+
+        $.post("<?php echo base_url(); ?>index.php/maincontrol/updatepost",
         {
-          content: $('#'+$(this).prop("id")).prop("value"),
+          content: $('#content'+$(this).prop("id")).prop("value"),
           post_number: $(this).prop("id")
         },
         function(data,status){
             $(location).attr('href', '<?php echo base_url(); ?>/index.php/maincontrol/getlists')
             //alert(data);
         });
-        */
+
     });
 
     $("[class~=delete]").click(function(event){
       //alert($('.'+$(this).prop("class")).prop("value"));
 
-        $.post("<?php echo base_url(); ?>/index.php/maincontrol/deletepost",
+        $.post("<?php echo base_url(); ?>index.php/maincontrol/deletepost",
         {
           post_number: $(this).prop("id")
         },
