@@ -104,7 +104,9 @@ class Admin_control extends CI_Controller {
 		function Admin_delete(){
 			$login_id=$this->uri->segment(3);
 			$this->load->model('Admin_model');
-			$this->Admin_model->delete($login_id);
+			$oldpicture = $this->Admin_model->delete($login_id);
+			if($oldpicture != '30422253_1813735568931061_1243079156_n.png')
+				@unlink("./uploads/".$oldpicture);
 			redirect("Admin_control");
 		}
 

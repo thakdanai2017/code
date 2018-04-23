@@ -14,7 +14,7 @@
 
 <!-- ลงทะเบียน&login -->
   <ul class="nav navbar-nav navbar-right">
-        <li><a href="<?php echo base_url('index.php/register/load')?>"><span class="glyphicon glyphicon-user"></span><font color="#fffff"> Register</a></font></li>
+        <li><a href="<?php echo base_url()?>index.php/register/load"><span class="glyphicon glyphicon-user"></span><font color="#fffff"> Register</a></font></li>
         <li><a href="<?php echo base_url('index.php/login')?>"><span class="glyphicon glyphicon-log-in"></span><font color="#fffff"> Login</a></font></li>
   </ul>
 
@@ -40,9 +40,9 @@
         <?php
   #ถ้ามีรูปแสดงรูป แต่ถ้าไม่มีรูปให้แสดง ภาพตั้งตัน
   if($value['member_picture']!=NULL){
-    echo "<img class='img' src='".base_url('uploads/'.$value['member_picture'])."' width='100' height='100'>";
+    echo "<img class='img img-circle' src='".base_url('uploads/'.$value['member_picture'])."' style='width:100px'>";
   }else {
-    echo "<img class='img' src='".base_url('uploads/30422253_1813735568931061_1243079156_n.png')."' width='100' height='100'>";
+    echo "<img class='img img-circle' src='".base_url('uploads/30422253_1813735568931061_1243079156_n.png')."' style='width:100px'>";
   }
   ?>
         <span class="w3-right "><font color="#000000" size="1">

@@ -50,7 +50,7 @@
     <?php echo form_open_multipart('admin_control/do_upload/'.$login_id,array('class' => 'form-horizontal' ));?>
     <br />
     <?php echo $error; ?>
-    <img id="img" src="" alt="" align="center" style="width: 200px;height:200px;padding: 20px;"/>
+    <img id="img" class="w3-circle" src="" alt="" align="center" style="width: 200px;padding: 20px;"/>
     <div class="form-group" align="left">
       <label class="control-label col-sm-3" for="picture">Picture  : </label>
       <div class="col-sm-8" align="left">
@@ -69,5 +69,18 @@
 <div class="footer">
   <p>Footer Text</p>
 </div>
+<script type="text/javascript">
+  function Preview(ele) {
+    $('#img').attr('src', ele.value);
+    if (ele.files && ele.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function (e) {
+        $('#img').attr('src', e.target.result);
+      }
+      reader.readAsDataURL(ele.files[0]);
+    }
+  }
+
+</script>
 </body>
 </html>

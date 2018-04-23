@@ -46,7 +46,7 @@ echo form_open('login/save');
     <div class="form-group">
       <label class="control-label col-sm-3" for="password">Password : </label> <!-- ต้องชนิด password เพื่อให้ซ่อนรหัสตอนกรอกรหัส -->
       <div class="col-sm-8">
-        <input type = 'password' name = 'password' onkeyup="isEngchar(this.value,this)" class="form-control" maxlength="16"  placeholder="Enter password">
+        <input type = 'password' name = 'password'  class="form-control" maxlength="16"  placeholder="Enter password">
          <?php echo form_error('password'); ?>
       </div>
     </div>

@@ -49,9 +49,9 @@
           <br>
           <?php
           if($userdata->member_picture==NULL){ ?>
-          <p class="w3-center"><img src="<?php echo base_url('assets/img/logo2.png');?>" class="w3-circle" style="height:106px;width:106px" alt="<?php echo $username;?>"></p>
+          <p class="w3-center"><img src="<?php echo base_url('assets/img/logo2.png');?>" class="w3-circle" style='width:100px' alt="<?php echo $username;?>"></p>
          <?php }else{?>
-           <p class="w3-center"><img src="<?php echo base_url('uploads/'.$userdata->member_picture);?>" class="w3-circle" style="height:106px;width:106px" alt="<?php echo $username;?>"></p>
+           <p class="w3-center"><img src="<?php echo base_url('uploads/'.$userdata->member_picture);?>" class="w3-circle" style='width:100px' alt="<?php echo $username;?>"></p>
            <?php }?>
          <h4 class="w3-center"><?php echo $userdata->member_name ;?> <?php echo $userdata->member_surname ;?></h4>
 
@@ -82,9 +82,10 @@
             <div class="w3-container w3-padding">
               <h6 class="w3-opacity">สร้างโพสต์</h6>
               <input type="text" name = 'content' id = "content" class="form-control"  maxlength="100" placeholder=" คุณกำลังคิดอะไรอยู่ ? "><br>
-              <button type =submit name =submit value="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button>
-            </div>
+              <button type =submit name =submit value="submit" class="w3-button w3-theme"><i class="fa fa-pencil"></i>  Post</button><br>
+            </div><br>
           </div>
+
         </div>
       </div>
     </form>
@@ -97,9 +98,9 @@
         <?php
   #ถ้ามีรูปแสดงรูป แต่ถ้าไม่มีรูปให้แสดง ภาพตั้งตัน
   if($value['member_picture']!=NULL){
-    echo "<img class='img' src='".base_url('uploads/'.$value['member_picture'])."' width='100' height='100'>";
+    echo "<img class='img' src='".base_url('uploads/'.$value['member_picture'])."' style='width:100px'>";
   }else {
-    echo "<img class='img' src='".base_url('uploads/30422253_1813735568931061_1243079156_n.png')."' width='100' height='100'>";
+    echo "<img class='img' src='".base_url('uploads/30422253_1813735568931061_1243079156_n.png')."' style='width:100px'>";
   }
   ?>
   <div class="btn-group pull-right">
@@ -126,6 +127,31 @@
   </div>
 <!-- End Page Container -->
 </div>
+
+<body>
+
+<div class="w3-container">
+  <div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+       <br><p><h4><center>การแก้ไขสำเร็จ</center></h4></p><br>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="w3-container">
+  <div id="id02" class="w3-modal">
+    <div class="w3-modal-content">
+      <div class="w3-container">
+       <br><p><h4><center>การลบสำเร็จ</center></h4></p><br>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
 </body>
 </html>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -142,7 +168,10 @@ $(document).ready(function(){
           post_number: $(this).prop("id")
         },
         function(data,status){
-            $(location).attr('href', '<?php echo base_url(); ?>/index.php/maincontrol/getlists')
+          //alert('success');
+          //$('#myModal').modal('show');
+          document.getElementById('id01').style.display='block' ;
+            $(location).attr('href', '<?php echo base_url(); ?>index.php/maincontrol/getlists')
             //alert(data);
         });
 
@@ -156,7 +185,8 @@ $(document).ready(function(){
           post_number: $(this).prop("id")
         },
         function(data,status){
-            $(location).attr('href', '<?php echo base_url(); ?>/index.php/maincontrol/getlists')
+          document.getElementById('id02').style.display='block' ;
+            $(location).attr('href', '<?php echo base_url(); ?>index.php/maincontrol/getlists')
             //alert(data);
         });
     });

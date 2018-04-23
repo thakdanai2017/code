@@ -120,7 +120,6 @@ class Maincontrol extends CI_Controller {
 			//$this->load->model('Post');
 			$this->Post->inputPost($login_id);
 			//$this->load->view('Home/mainpage' , $data );
-			//redirect("Maincontrol");
 			$this->getlists();
 		}else {
 			redirect('Maincontrol');

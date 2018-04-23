@@ -54,7 +54,7 @@
     <div class="form-group">
       <label class="control-label col-sm-3" for="birthday">Birthday : </label>
       <div class="col-sm-8">
-        <input type = 'date' name="bday" min="1995-01-01" value="<?php echo  $userdata->member_birthday ?>" class="form-control" >
+        <input type = 'date' name="bday" min="1900-01-01" value="<?php echo  $userdata->member_birthday ?>" class="form-control" >
       </div>
     </div>
     <div class="form-group">

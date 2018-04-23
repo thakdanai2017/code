@@ -52,13 +52,14 @@
       <!-- Profile -->
       <div class="w3-card w3-round w3-white">
         <div class="w3-container">
+          <br>
            <?php
            if($userdata->member_picture==NULL){ ?>
-           <p class="w3-center"><img src="<?php echo base_url('assets/img/logo2.png');?>" class="w3-circle" style="height:106px;width:106px" alt="<?php echo $username;?>"></p>
+           <p class="w3-center"><img src="<?php echo base_url('assets/img/logo2.png');?>" class="w3-circle" style='width:100px' alt="<?php echo $username;?>"></p>
           <?php }else{?>
-            <p class="w3-center"><img src="<?php echo base_url('uploads/'.$userdata->member_picture);?>" class="w3-circle" style="height:106px;width:106px" alt="<?php echo $username;?>"></p>
+            <p class="w3-center"><img src="<?php echo base_url('uploads/'.$userdata->member_picture);?>" class="w3-circle" style='width:100px' alt="<?php echo $username;?>"></p>
             <?php }?>
-         <h5 class="w3-center"> <?php echo $username; ?> </h5>
+         <h5 class="w3-center"> <?php echo $username; ?> </h5><br>
         </div>
       </div>
 
@@ -93,9 +94,9 @@
         <?php
   #ถ้ามีรูปแสดงรูป แต่ถ้าไม่มีรูปให้แสดง ภาพตั้งตัน
   if($value['member_picture']!=NULL){
-    echo "<img class='img' src='".base_url('uploads/'.$value['member_picture'])."' width='100' height='100'>";
+    echo "<img class='img img-circle' src='".base_url('uploads/'.$value['member_picture'])."'style='width:100px'>";
   }else {
-    echo "<img class='img' src='".base_url('uploads/30422253_1813735568931061_1243079156_n.png')."' width='100' height='100'>";
+    echo "<img class='img img-circle' src='".base_url('uploads/30422253_1813735568931061_1243079156_n.png')."' style='width:100px'>";
   }
   ?>
         <span class="w3-right "><font color="#000000" size="1">

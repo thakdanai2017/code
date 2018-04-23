@@ -8,8 +8,15 @@ class Admin_model extends CI_Model{
     return $result->result_array();
   }
   function delete($login_id){
-      $this->db->where('login_id',$login_id);
-      $this->db->delete('login');
+    $this->db->select('member_picture');
+    $this->db->from('member');
+    $this->db->where('login_id', $login_id);
+    $this->db->limit(1);
+    
+    $pic_old = $this->db->get()->row()->member_picture;
+    $this->db->where('login_id',$login_id);
+    $this->db->delete('login');
+    return $pic_old;
     }
  public function uploadpic($login_id,$name_picture){
 

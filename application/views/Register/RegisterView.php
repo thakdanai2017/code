@@ -1,9 +1,9 @@
 
 <?php
   //ถ้ามีการ login ไว้แล้ว ก็จะไปหน้า home
-  if (isset($this->session->userdata['logged_in'])) {
-    header("Location: index.php/Maincontrol");
-  }
+  //if (isset($this->session->userdata['logged_in'])) {
+  //  header("Location: index.php/Maincontrol");
+  //}
 
 ?>
 
@@ -31,7 +31,7 @@
     <div class="form-group">
       <label class="control-label col-sm-3" for="username">Username :</label>
       <div class="col-sm-8">
-        <input type = 'username' name = 'username' id = "username" class="form-control"  maxlength="16" placeholder="Enter username" value="<?php echo set_value('username'); ?>"> <?php echo form_error('username'); ?>
+        <input type = 'username' onkeyup="isEngchar(this.value,this)" name = 'username' id = "username" class="form-control"  maxlength="16" placeholder="Enter username" value="<?php echo set_value('username'); ?>"> <?php echo form_error('username'); ?>
       </div>
     </div>
     <div class="form-group">
@@ -62,5 +62,19 @@
 </div>
 </div>
 </div>
+<script type="text/javascript">
+function isEngchar(str,obj){
+    var isEng=true;
+    var orgi_text=" abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+    var chk_text=str.split("");
+    chk_text.filter(function(s){
+        if(orgi_text.indexOf(s)==-1){
+            isEng=false;
+            obj.value=str.replace(RegExp(s, "g"),'');
+        }
+    });
+    return isEng;
+}
+</script>
 </body>
 </html>
